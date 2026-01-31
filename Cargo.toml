@@ -1,0 +1,14 @@
+[workspace]
+members = [
+    "backend",
+    "bot",
+    "frontend", "shared",
+]
+resolver = "2"
+
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = {version = "1.40", features = ["full"] }
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.0", features = ["v4", "serde"] }

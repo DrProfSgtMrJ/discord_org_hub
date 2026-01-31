@@ -1,0 +1,15 @@
+[package]
+name = "shared"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+chrono.workspace = true
+uuid.workspace = true
+sqlx = { version = "0.7", features = ["postgres", "uuid", "chrono", "macros"], optional = true }
+
+[features]
+default = []
+database = ["sqlx"]
