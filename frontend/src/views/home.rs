@@ -1,5 +1,4 @@
 use crate::components::{DownloadButton, Leaderboard};
-use crate::config::urlencoding;
 use crate::services::DiscordService;
 use dioxus::prelude::*;
 use dioxus_router::hooks::use_navigator;

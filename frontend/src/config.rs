@@ -52,10 +52,7 @@ impl Config {
     pub fn node_env() -> &'static str {
         option_env!("VITE_NODE_ENV").unwrap_or("development")
     }
-}
 
-/// Helper functions for building URLs
-impl Config {
     /// Get the full Discord OAuth authorization URL
     pub fn discord_oauth_url() -> String {
         format!(
