@@ -14,12 +14,6 @@ pub struct DiscordUser {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq)]
-pub struct AuthCallbackParams {
-    pub code: Option<String>,
-    pub error: Option<String>,
-}
-
 pub struct DiscordService;
 
 impl DiscordService {
@@ -47,81 +41,6 @@ impl DiscordService {
         }
 
         Ok(())
-    }
-
-    /// Parse URL parameters from OAuth callback (handles both token and code flows)
-    pub fn parse_callback_params() -> AuthCallbackParams {
-        let mut params = AuthCallbackParams {
-            code: None,
-            error: None,
-        };
-
-        if let Some(window) = window() {
-            let location = window.location();
-            if let Ok(href) = location.href() {
-                web_sys::console::log_1(&format!("🔍 Parsing callback URL: {}", href).into());
-
-                // Check query parameters for authorization code (code flow)
-                if let Ok(url) = Url::new(&href) {
-                    let search_params = url.search_params();
-
-                    // Log parameters we're specifically looking for
-                    web_sys::console::log_1(&"🔍 Checking for specific parameters:".into());
-
-                    // Check for OAuth code (authorization code flow)
-                    if let Some(code) = search_params.get("code") {
-                        web_sys::console::log_1(
-                            &format!("✅ Found authorization code: {}", code).into(),
-                        );
-                        params.code = Some(code);
-                    } else {
-                        web_sys::console::log_1(&"❌ No 'code' parameter found".into());
-                    }
-
-                    // Check for OAuth error
-                    if let Some(error) = search_params.get("error") {
-                        web_sys::console::log_1(&format!("❌ Found OAuth error: {}", error).into());
-                        params.error = Some(error);
-                    } else {
-                        web_sys::console::log_1(&"✅ No error parameter found".into());
-                    }
-                } else {
-                    web_sys::console::log_1(&"❌ Failed to parse URL!".into());
-                }
-            }
-        }
-
-        params
-    }
-
-    /// Check if current URL indicates successful authentication
-    pub fn is_auth_success() -> bool {
-        if let Some(window) = window() {
-            let location = window.location();
-            if let Ok(href) = location.href() {
-                if let Ok(url) = Url::new(&href) {
-                    let search_params = url.search_params();
-                    if let Some(auth_param) = search_params.get("auth") {
-                        return auth_param == "success";
-                    }
-                }
-            }
-        }
-        false
-    }
-
-    /// Check if current URL indicates authentication error
-    pub fn is_auth_error() -> bool {
-        if let Some(window) = window() {
-            let location = window.location();
-            if let Ok(href) = location.href() {
-                if let Ok(url) = Url::new(&href) {
-                    let search_params = url.search_params();
-                    return search_params.get("error").is_some();
-                }
-            }
-        }
-        false
     }
 
     /// Clear URL parameters by replacing current state

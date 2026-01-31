@@ -9,13 +9,12 @@ pub struct Config;
 impl Config {
     /// Discord OAuth client ID
     pub fn discord_client_id() -> &'static str {
-        option_env!("VITE_DISCORD_CLIENT_ID").unwrap_or("1466997290819649619")
+        option_env!("DISCORD_CLIENT_ID").unwrap_or("1466997290819649619")
     }
 
     /// Discord OAuth redirect URI
     pub fn discord_redirect_uri() -> &'static str {
-        option_env!("VITE_DISCORD_REDIRECT_URI")
-            .unwrap_or("http://localhost:8081/auth/discord/callback")
+        option_env!("DISCORD_REDIRECT_URI").unwrap_or("http://localhost:8081/auth/discord/callback")
     }
 
     /// Discord OAuth scopes
@@ -25,17 +24,17 @@ impl Config {
 
     /// Backend base URL
     pub fn backend_url() -> &'static str {
-        option_env!("VITE_BACKEND_URL").unwrap_or("http://localhost:8080")
+        option_env!("BACKEND_URL").unwrap_or("http://localhost:8080")
     }
 
     /// Backend API URL
     pub fn backend_api_url() -> &'static str {
-        option_env!("VITE_BACKEND_API_URL").unwrap_or("http://localhost:8080/api")
+        option_env!("BACKEND_API_URL").unwrap_or("http://localhost:8080/api")
     }
 
     /// Backend auth URL
     pub fn backend_auth_url() -> &'static str {
-        option_env!("VITE_BACKEND_AUTH_URL").unwrap_or("http://localhost:8080/auth")
+        option_env!("BACKEND_AUTH_URL").unwrap_or("http://localhost:8080/auth")
     }
 
     /// Discord OAuth authorization URL
@@ -45,12 +44,12 @@ impl Config {
 
     /// Frontend base URL
     pub fn frontend_url() -> &'static str {
-        option_env!("VITE_FRONTEND_URL").unwrap_or("http://localhost:8081")
+        option_env!("FRONTEND_URL").unwrap_or("http://localhost:8081")
     }
 
     /// Environment (development, staging, production)
     pub fn node_env() -> &'static str {
-        option_env!("VITE_NODE_ENV").unwrap_or("development")
+        option_env!("NODE_ENV").unwrap_or("development")
     }
 
     /// Get the full Discord OAuth authorization URL
